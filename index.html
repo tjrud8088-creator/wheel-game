@@ -1,4 +1,5 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#a3e5ef"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"></head><body>
 <title>손끝 물레방</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
@@ -14,16 +15,17 @@
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;overflow:hidden}
+html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none}
+body{position:fixed;inset:0;width:100%}
 body{background:linear-gradient(180deg,var(--sky) 0%,var(--sky2) 100%);color:var(--plum);font-family:var(--body);
-  word-break:keep-all;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}
+  word-break:keep-all;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:none;touch-action:manipulation}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
 button:focus-visible{outline:3px solid var(--plum);outline-offset:2px}
 h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;letter-spacing:-.01em;text-wrap:balance}
 p{margin:0}
 .num{font-variant-numeric:tabular-nums}
 
-#app{position:absolute;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-width:0}
+#app{position:fixed;top:0;left:0;right:0;height:100vh;height:100dvh;height:var(--app-h,100dvh);padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-width:0}
 
 /* ---------- Top HUD ---------- */
 .hud-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"prof center nav";gap:10px 14px;align-items:center;padding:10px 16px}
@@ -59,7 +61,7 @@ p{margin:0}
 #main{position:relative;min-height:0}
 .view{position:absolute;inset:0;display:none;overflow:auto;padding:6px 16px 16px}
 .view.on{display:block}
-#v2{padding:0;overflow:hidden}
+#v2{padding:0;overflow:hidden;touch-action:none}
 #v2.on{display:block}
 #cv{position:absolute;inset:0;width:100%;height:100%;touch-action:none;display:block}
 .toast{position:absolute;left:50%;top:10px;transform:translate(-50%,-14px);opacity:0;display:flex;align-items:center;gap:10px;max-width:calc(100% - 24px);
@@ -365,7 +367,91 @@ p{margin:0}
 .kdone{position:absolute;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(43,35,80,.35)}
 .kdone[hidden]{display:none}
 .kdcard{width:100%;max-width:480px;background:#fff;border-radius:28px;padding:22px;text-align:center;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 0 rgba(43,35,80,.2);animation:pop .4s cubic-bezier(.2,1.5,.4,1)}
-.kdcard h2{font-size:26px}@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.kdcard h2{font-size:26px}
+@media (max-width:520px){.toast{font-size:15px;padding:7px 14px;max-width:calc(100% - 130px);top:8px}}/* ===== 휴대폰 대응: 세로(폭 좁음)·가로(높이 낮음) 모두 게임 화면이 가장 크게 보이도록 상·하단 HUD를 얇게 ===== */
+@media (max-height:520px) and (orientation:landscape),(max-width:560px){
+  .navcol{display:none}
+  body:not([data-view="2"]) .hud-bot{display:none}
+  body.admin .navcol{display:flex}
+  body.admin .hud-top{grid-template-areas:"prof center" "nav nav"}
+  .hud-top{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"prof center";gap:8px;padding:6px 10px}
+  .prof{padding:3px 10px 3px 3px;gap:6px}
+  .avatar{width:30px;height:30px;font-size:14px;border-width:2px}
+  .prof b{display:none}
+  .streak{font-size:11px}
+  .center{max-width:none;padding:4px 12px;gap:8px}
+  .timer{font-size:16px;min-width:40px}
+  .gauge{height:10px}
+  .score{font-size:16px;min-width:56px}
+  .score small{display:none}
+  .hud-bot{grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:6px 10px 8px}
+  .mission{padding:6px 14px;border-radius:18px}
+  .mission small{font-size:10px}
+  .mission b{font-size:14px;line-height:1.25}
+  .dots{margin-top:3px}.dots i{width:16px;height:6px}
+  .judge{min-width:92px;min-height:44px;padding:2px 8px}
+  .judge b{font-size:20px}.judge small{font-size:10px}
+  .toast{font-size:14px;padding:6px 14px;top:6px;max-width:calc(100% - 120px)}
+  .stopbtn{padding:6px 12px;font-size:12px;top:6px;right:8px}
+  .adaptchip{top:6px;left:8px;font-size:11px;padding:5px 10px}
+  .view{padding:4px 10px 14px}
+  .panel{padding:14px}
+  .wrap{gap:10px}
+  .kdcard{padding:16px;gap:8px}.kdcard h2{font-size:21px}
+  .btn{min-height:48px;font-size:18px;padding:0 18px}
+  .fsmodal .wrap{padding-top:52px}
+  .d-main{padding:12px 14px 20px}
+  .d-nav .em{font-size:20px}
+}
+@media (max-height:520px) and (orientation:landscape){
+  .d-side{overflow-y:auto;padding:8px 0}.d-logo{display:none}.d-nav{padding:5px 0 4px;font-size:10px}
+  .d-pop{bottom:8px}
+  .hud-bot{grid-template-columns:minmax(0,1fr) 120px}
+  .toast{font-size:13px;max-width:calc(100% - 200px)}
+}
+body.admin .navcol{display:flex}
+/* 아주 낮은 화면(작은 휴대폰 가로): 하단 바를 한 줄로 */
+@media (max-height:340px){
+  .mission small,.dots,.judge small{display:none}
+  .mission{padding:5px 12px}.mission b{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .judge{min-height:32px;min-width:88px}.judge b{font-size:17px}
+  .hud-bot{padding:3px 10px 5px}.hud-top{padding:4px 10px}
+  .avatar{width:26px;height:26px}.center{padding:3px 12px}.toast{font-size:12.5px;padding:4px 12px}
+}
+/* ===== 가로 모드 플레이: 상·하단 HUD를 화면 위에 얇게 띄우고 물레 영역을 화면 전체로 ===== */
+.modal{max-height:calc(100% - 8px);overflow-y:auto}
+.kdcard{max-height:calc(100% - 4px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.kdone{z-index:9}
+@media (max-height:520px) and (orientation:landscape){
+  body[data-view="2"] #app{grid-template-rows:minmax(0,1fr)}
+  body[data-view="2"] #main{grid-row:1;grid-column:1}
+  body[data-view="2"] .hud-top,body[data-view="2"] .hud-bot{position:absolute;left:0;right:0;z-index:8;pointer-events:none;
+    padding-left:calc(10px + env(safe-area-inset-left,0px));padding-right:calc(10px + env(safe-area-inset-right,0px))}
+  body[data-view="2"] .hud-top{top:env(safe-area-inset-top,0px);padding-top:4px;padding-bottom:0}
+  body[data-view="2"] .hud-bot{bottom:env(safe-area-inset-bottom,0px);padding-top:0;padding-bottom:4px}
+  body[data-view="2"] .navcol{pointer-events:auto}
+  body[data-view="2"] .prof,body[data-view="2"] .center{padding-top:2px;padding-bottom:2px}
+  body[data-view="2"] .avatar{width:26px;height:26px}
+  body[data-view="2"] .mission{padding:4px 12px}
+  body[data-view="2"] .mission small,body[data-view="2"] .dots{display:none}
+  body[data-view="2"] .mission b{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  body[data-view="2"] .judge{min-height:30px;min-width:96px;padding:0 8px}
+  body[data-view="2"] .judge small{display:none}
+  body[data-view="2"] .judge b{font-size:17px}
+  body[data-view="2"] .toast{top:auto;bottom:44px;font-size:12.5px;padding:4px 12px;transform:translate(-50%,10px)}
+  body[data-view="2"] .toast.show{transform:translate(-50%,0)}
+  body[data-view="2"] .stopbtn,body[data-view="2"] .adaptchip{top:44px}
+  .kdone{padding:4px 8px}
+  .kdcard{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:14px;row-gap:4px;text-align:left;padding:12px 16px;align-items:center}
+  .kdcard>*{grid-column:2}
+  .kdcard>#kdBody{grid-column:1;grid-row:1/span 6}
+  .kdcard h2{font-size:19px}
+  .kdcard .btn{min-height:42px;font-size:16px}
+  .kdcard #kdBody{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px}
+  .kdcard .cb{padding:6px 2px}.kdcard .cb b{font-size:17px}.kdcard .cb small{font-size:10px}
+  .kdcard .eyebrow,.kdcard p{margin:0}
+  .modal{padding:14px;gap:8px}.modal h2{font-size:19px}
+}@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
 <div id="app">
@@ -560,7 +646,7 @@ const todayStr=()=>today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDat
 function saveState(){try{localStorage.setItem(KEY,JSON.stringify(Object.fromEntries(PERSIST.map(k=>[k,S[k]]))))}catch(_){}}
 function loadState(){try{const j=JSON.parse(localStorage.getItem(KEY)||'null');if(j&&j.returning){Object.assign(S,j);return true}}catch(_){}return false}
 function resetNew(){
-  Object.assign(S,{returning:false,level:1,nextLevel:1,baseline:null,clay:0,fit:{padScale:1,hit:2.4,tolAdd:0},streak:0,best:0,sessions:[],unlocked:1,newDex:-1,dexSel:0,calibrated:false,firstToday:true,lastDate:'',last:JSON.parse(JSON.stringify(SAMPLE.last))});
+  Object.assign(S,{returning:false,hand:'right',level:1,nextLevel:1,baseline:null,clay:0,fit:{padScale:1,hit:2.4,tolAdd:0},streak:0,best:0,sessions:[],unlocked:1,newDex:-1,dexSel:0,calibrated:false,firstToday:true,lastDate:'',last:JSON.parse(JSON.stringify(SAMPLE.last))});
   try{localStorage.removeItem(KEY)}catch(_){}
 }
 function seedReturning(){
@@ -583,14 +669,23 @@ function layout(){
   const dpr=Math.min(window.devicePixelRatio||1,2),W=cv.clientWidth,H=cv.clientHeight;
   if(!W||!H)return;
   cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-  const s=Math.min(W/860,H/640);
-  const wy=clamp(H*.72,0,H-90*s);
-  const padR=Math.max(36,52*s)*(S.fit.padScale||1), r0=132*s, h0=242*s;
+  const land=matchMedia('(max-height:520px) and (orientation:landscape)').matches&&document.body.dataset.view==='2';
+  const insT=land?(document.querySelector('.hud-top').offsetHeight+4):0,insB=land?(document.querySelector('.hud-bot').offsetHeight+4):0,Hc=H-insT-insB;
+  const shortH=Hc<420,s=Math.min(W/860,Hc/(shortH?470:600));
+  const wy=insT+clamp(Hc*.72,0,Hc-90*s);
+  const padR=Math.max(shortH?30:36,52*s)*(S.fit.padScale||1), r0=132*s, h0=242*s;
   const D=Math.min(W/2-padR-10,290*s);
   const mid=wy-h0*.52;
-  L={W,H,S:s,cx:W/2,wy,padR,r0,h0,D,mid};
-  const o=padR*1.65;
-  [[L.cx-D,mid],[L.cx+D,mid-o],[L.cx+D,mid+o]].forEach(([x,y],i)=>{pads[i].x=x;pads[i].y=y;pads[i].px=x;pads[i].py=y});
+  /* UT 피드백 반영(손을 직접 올려 본 위치): 엄지는 흙 옆 왼쪽, 검지는 흙 바로 위, 중지는 검지 오른쪽 위. 손을 편하게 놓은 채로 닿는 배치 */
+  const sg=S.hand==='left'?-1:1,cxx=W/2; /* 사용 손에 맞춰 좌우 반전: 오른손은 왼쪽부터 엄지·검지·중지, 왼손은 오른쪽부터 */
+  const top=insT+padR+(land?6:shortH?40:66); /* 상단 코칭 문구 아래부터 */
+  let yI=Math.max(top,mid-padR*4.9),yM=Math.max(top,mid-padR*5.6),xI=cxx+sg*D*.08,xM=cxx+sg*D*.74;
+  const yT=mid+padR*.3;
+  if(shortH){ /* 낮은 화면(휴대폰 가로): 검지·중지를 흙 오른쪽 위로 부채꼴 배치해 흙을 가리지 않게 */
+    yI=Math.max(top,mid-padR*2.3);yM=Math.max(yI+padR*2.15,mid-padR*.15);xI=cxx+sg*D*.7;xM=cxx+sg*D*1.02;yM=Math.min(yM,H-insB-padR-8);yI=Math.min(yI,yM-padR*1.4);
+  }
+  L={W,H,S:s,cx:W/2,wy,padR,r0,h0,D,mid,fy:mid-padR*.8,insB};
+  [[cxx-sg*D,yT],[xI,yI],[xM,yM]].forEach(([x,y],i)=>{pads[i].x=x;pads[i].y=y;pads[i].px=x;pads[i].py=y});
 }
 new ResizeObserver(layout).observe(cv);
 
@@ -600,7 +695,7 @@ const pres=e=>(e.pointerType==='touch'&&e.pressure&&e.pressure!==.5)?e.pressure:
 function gripping(){return [...held.values()].some(h=>h.mouse)||held.size>=2}
 function curDist(){
   const a=[...held.values()];
-  const m=a.find(h=>h.mouse); if(m)return Math.hypot(m.x-L.cx,m.y-L.mid);
+  const m=a.find(h=>h.mouse); if(m)return Math.hypot(m.x-L.cx,m.y-L.fy);
   if(a.length<2)return 0;
   const cx=a.reduce((s,h)=>s+h.x,0)/a.length, cy=a.reduce((s,h)=>s+h.y,0)/a.length;
   return a.reduce((s,h)=>s+Math.hypot(h.x-cx,h.y-cy),0)/a.length;
@@ -824,7 +919,7 @@ function updateKnead(dt,grip){
   g.elapsed+=dt;
   // 손가락 자국(쫀득하게 눌린 흔적)
   k.dentT+=dt;
-  if(k.dentT>.16){k.dentT=0;held.forEach(h=>{if(g.dents.length<36)g.dents.push({x:h.mouse?L.cx+(Math.random()-.5)*L.r0*.8:h.x,y:h.mouse?L.mid+(Math.random()-.5)*L.r0*.8:h.y,life:1.2})})}
+  if(k.dentT>.16){k.dentT=0;held.forEach(h=>{if(g.dents.length<36)g.dents.push({x:h.mouse?L.cx+(Math.random()-.5)*L.r0*.8:h.x,y:h.mouse?L.fy+(Math.random()-.5)*L.r0*.8:h.y,life:1.2})})}
   const R=g.R;
   if(k.phase==='wait'){k.maxR=R;k.minR=R;knPhase('spread','손가락을 쫙 벌려 보세요!');return}
   k.t+=dt;
@@ -870,7 +965,7 @@ function playTransition(){
 }
 /* ---- 그리기: 반죽 테이블 / 점토 덩어리 / 물레로 툭 올리기 ---- */
 function drawTable(t){
-  const {W,H,S}=L,y0=L.mid+L.r0*.78;
+  const {W,H,S}=L,y0=L.fy+L.r0*.78;
   ctx.clearRect(0,0,W,H);
   const gr=ctx.createLinearGradient(0,y0,0,H);gr.addColorStop(0,'#ffd996');gr.addColorStop(1,'#eeb060');
   ctx.fillStyle=gr;ctx.fillRect(0,y0,W,H-y0);
@@ -880,7 +975,7 @@ function drawTable(t){
 }
 function lumpPath(cx,cy,rx,ry){ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,7)}
 function drawLump(t,dt){
-  const R=g.Rd,base=L.r0*.85,cx=L.cx,cy=L.mid,rx=base*(.62+.38*R),ry=base*(1+(1-R)*.3),c=CL().c;
+  const R=g.Rd,base=L.r0*.85,cx=L.cx,cy=L.fy,rx=base*(.62+.38*R),ry=base*(1+(1-R)*.3),c=CL().c;
   // 그림자
   ctx.fillStyle='rgba(120,70,20,.22)';ctx.beginPath();ctx.ellipse(cx,cy+ry*.92,rx*1.05,ry*.18,0,0,7);ctx.fill();
   const gr=ctx.createRadialGradient(cx-rx*.35,cy-ry*.4,base*.1,cx,cy,Math.max(rx,ry)*1.1);gr.addColorStop(0,c[1]);gr.addColorStop(.55,c[2]);gr.addColorStop(1,c[0]);
@@ -1000,12 +1095,12 @@ function drawGhost(t){
   ctx.fillStyle=flash?'rgba(59,130,246,.14)':'rgba(32,226,158,.18)';ctx.fill();
   ctx.setLineDash([]);ctx.lineWidth=10;ctx.strokeStyle='rgba(255,255,255,.85)';ctx.stroke();ctx.lineWidth=5.5;ctx.strokeStyle=flash?'rgb(59,130,246)':'rgba(32,226,158,'+(.82+.18*Math.sin(t*4))+')';ctx.shadowColor='rgba(32,226,158,.9)';ctx.shadowBlur=10+8*Math.sin(t*4);ctx.stroke();ctx.restore();
   // 목표 라벨
-  const lx=L.cx+sh.r(.62)+10, ly=L.wy-sh.h*.62;
+  const lx=0, ly=L.wy+34*L.S*1.18;
   ctx.save();ctx.font='800 13px "Noto Sans KR",sans-serif';const txt='목표 모양',w=ctx.measureText(txt).width+20;
-  const bx=clamp(lx,4,L.W-w-4);ctx.fillStyle=flash?'#3b82f6':'#17a768';ctx.beginPath();ctx.roundRect(bx,ly-12,w,24,12);ctx.fill();
+  const bx=clamp(L.cx-w/2,4,L.W-w-4);ctx.fillStyle=flash?'#3b82f6':'#17a768';ctx.beginPath();ctx.roundRect(bx,ly-12,w,24,12);ctx.fill();
   ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.fillText(txt,bx+10,ly+1);ctx.restore();
   // 유지 시간 게이지
-  const hh=shape(g.Rd).h,bw=Math.max(130,160*L.S),bxx=L.cx-bw/2,by=Math.max(66,L.wy-hh-48*L.S),k=g.armed?clamp(g.band/m.hold,0,1):1;
+  const hh=shape(g.Rd).h,bw=Math.max(130,160*L.S),bxx=L.cx-bw/2,by=Math.min(L.H-(L.insB||0)-44,L.wy+78*L.S*1.18),k=g.armed?clamp(g.band/m.hold,0,1):1;
   ctx.save();ctx.fillStyle='rgba(255,255,255,.92)';ctx.beginPath();ctx.roundRect(bxx-6,by-8,bw+12,34,17);ctx.fill();
   ctx.fillStyle='#e9e2f5';ctx.beginPath();ctx.roundRect(bxx,by,bw,10,5);ctx.fill();
   if(k>0){ctx.fillStyle=g.armed?'#2fd08a':'#ffd23f';ctx.beginPath();ctx.roundRect(bxx,by,Math.max(10,bw*k),10,5);ctx.fill()}
@@ -1039,7 +1134,7 @@ function fingertip(x,y,ang,u,alpha){
 function drawPads(t){
   const m=g.missions[Math.min(g.mi,g.missions.length-1)]||MDEF[0], dir=g.scene==='knead'?(g.kn.phase==='spread'?1:g.kn.phase==='hold'?0:-1):(g.phase==='run'?m.dir:-1), u=L.padR/50;
   pads.forEach((p,i)=>{
-    const s=p.on, pulse=.5+.5*Math.sin(t*3+i*1.3), ang=Math.atan2(L.mid-p.y,L.cx-p.x);
+    const s=p.on, pulse=.5+.5*Math.sin(t*3+i*1.3), ang=Math.atan2(L.fy-p.y,L.cx-p.x);
     const h=heat(p.hp), col=p.col;
     // 은은한 글로우
     const gl=ctx.createRadialGradient(p.x,p.y,L.padR*.5,p.x,p.y,L.padR*1.9);
@@ -1059,11 +1154,11 @@ function drawPads(t){
       const bob=Math.sin(t*4+i)*5*u;
       fingertip(p.x-Math.cos(ang)*bob,p.y-Math.sin(ang)*bob,ang,u,1-s);
       ctx.save();ctx.globalAlpha=1-s;ctx.fillStyle='#2b2350';ctx.font='800 '+Math.max(11,12*u)+'px "Noto Sans KR",sans-serif';ctx.textAlign='center';
-      ctx.fillText(p.name,p.x,p.y+L.padR+16);ctx.restore();
+      const ly=p.y+L.padR*.66;ctx.lineWidth=4;ctx.strokeStyle='rgba(255,255,255,.95)';ctx.lineJoin='round';ctx.strokeText(p.name,p.x,ly);ctx.fillText(p.name,p.x,ly);ctx.restore();
     }
     // 방향 화살표: 오므리기는 원에서 흙 쪽으로, 벌리기는 원 바깥쪽으로 흐르는 화살표
     if(g.phase==='run'&&s<.6&&dir!==0){
-      const ux=Math.cos(ang),uy=Math.sin(ang),dl=Math.hypot(L.cx-p.x,L.mid-p.y),gap=Math.max(24,dl-L.padR*1.3-L.r0*Math.max(g.Rd,.5)*.95);
+      const ux=Math.cos(ang),uy=Math.sin(ang),dl=Math.hypot(L.cx-p.x,L.fy-p.y),gap=Math.max(24,dl-L.padR*1.3-L.r0*Math.max(g.Rd,.5)*.95);
       for(let k=0;k<3;k++){
         const fr=(t*.7+k/3)%1,dd=dir<0?L.padR*1.25+gap*fr:-(L.padR*1.25+L.padR*1.3*fr),ax=p.x+ux*dd,ay=p.y+uy*dd;
         if(ax<14||ax>L.W-14||ay<14||ay>L.H-14)continue;
@@ -1080,7 +1175,7 @@ function drawPads(t){
       ctx.lineWidth=5;ctx.strokeStyle='rgb('+col+')';ctx.beginPath();ctx.arc(p.x,p.y,L.padR*(1.05+.9*k),0,7);ctx.stroke();ctx.restore();
     }    // 히트맵 반원
     if(s>.02){
-      const hr=L.padR*(1.05+.25*s), a2=Math.atan2(L.mid-p.py,L.cx-p.px);
+      const hr=L.padR*(1.05+.25*s), a2=Math.atan2(L.fy-p.py,L.cx-p.px);
       ctx.save();ctx.globalAlpha=s;
       const gg=ctx.createRadialGradient(p.px,p.py,0,p.px,p.py,hr*1.15);gg.addColorStop(0,'rgba('+h+',.9)');gg.addColorStop(.55,'rgba('+h+',.42)');gg.addColorStop(1,'rgba('+h+',0)');
       ctx.fillStyle=gg;ctx.beginPath();ctx.arc(p.px,p.py,hr*1.15,0,7);ctx.fill();
@@ -1422,7 +1517,7 @@ function go(n){
   closeModals();
   if(n!==2)$('#kDone').hidden=true;
   if(n===2&&g.phase!=='run')startSession(false);
-  S.view=n;$$('.view').forEach((v,i)=>v.classList.toggle('on',i===n));$$('#nav button').forEach(b=>b.classList.toggle('on',+b.dataset.go===n));
+  S.view=n;document.body.dataset.view=n;$$('.view').forEach((v,i)=>v.classList.toggle('on',i===n));$$('#nav button').forEach(b=>b.classList.toggle('on',+b.dataset.go===n));
   $$('[data-ut]').forEach(b=>b.classList.toggle('on',(b.dataset.ut==='ret')===!!S.returning));
   $('#lvChip').textContent='Lv.'+S.level;$('#streakTxt').textContent='🔥 '+S.streak+'일 연속';
   if(n===0)renderDiag();if(n===1)renderHome();if(n===3)renderResult();
@@ -1444,12 +1539,19 @@ $('#lvCard').addEventListener('click',e=>{if(e.target.closest('#tomorrowBtn')){S
   $('#saveModal').classList.remove('on');g.phase='idle';
   if(b.dataset.ut==='new'){resetNew();go(0)}else{seedReturning();go(1)}}));$('#dClose').onclick=closeModals;$('#dexClose').onclick=closeModals;document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(S.detail)closeDetail();else if(S.modal)closeModals()});$('#ddBack').onclick=closeDetail;$('#ddClose').onclick=closeDetail;$('#dGrid').addEventListener('click',e=>{const b=e.target.closest('[data-detail]');if(b)openDetail(b.dataset.detail)});
 $('#dSet').onclick=()=>{const p=$('#dPop');p.hidden=!p.hidden;$('#dSet').setAttribute('aria-expanded',String(!p.hidden))};
-$('#handSeg').addEventListener('click',e=>{const b=e.target.closest('.choice');if(b){S.hand=b.dataset.v;renderDiag()}});
+$('#handSeg').addEventListener('click',e=>{const b=e.target.closest('.choice');if(b){S.hand=b.dataset.v;saveState();layout();renderDiag()}});
 $('#adlList').addEventListener('click',e=>{const b=e.target.closest('.choice');if(b){S.adl=+b.dataset.i;renderDiag()}});
 $('#dexGrid').addEventListener('click',e=>{const b=e.target.closest('.dex');if(b){S.dexSel=+b.dataset.i;const n=S.newDex;renderDex();S.newDex=n>=0?n:-1}});
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('gesturestart',e=>e.preventDefault());
 
+/* 주소창이 접히고 펴져도 화면 높이를 실제 보이는 영역에 맞춤 + 플레이 화면에서는 스크롤·바운스 차단 */
+function setAppH(){const h=(window.visualViewport&&visualViewport.height)||window.innerHeight;document.documentElement.style.setProperty('--app-h',Math.round(h)+'px')}
+setAppH();window.addEventListener('resize',setAppH);window.addEventListener('orientationchange',()=>setTimeout(setAppH,150));
+if(window.visualViewport)visualViewport.addEventListener('resize',setAppH);
+document.addEventListener('touchmove',e=>{if(!e.target.closest('.view:not(#v2),.fsmodal,#dash,.d-main,.d-detail,.kdcard,.modal'))e.preventDefault()},{passive:false});
+/* 진행자용 메뉴(UT 토글·화면 이동)는 주소 끝에 #admin을 붙이면 어느 기기에서나 보임 */
+const adminFlag=()=>document.body.classList.toggle('admin',/admin/.test(location.hash));adminFlag();window.addEventListener('hashchange',adminFlag);
 /* 진입 분기: 저장된 기록이 있으면 재방문(바로 홈), 없으면 신규(진단부터) */
 if(loadState()){
   if(S.lastDate&&S.lastDate!==todayStr()){S.level=S.nextLevel;S.firstToday=true;S.lastDate=todayStr();saveState()}
