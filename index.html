@@ -715,6 +715,22 @@ body:not(.admin) #tomorrowBtn{display:none}
   #v0 .btn{min-height:clamp(54px,8vh,72px);font-size:clamp(17px,2.4vh,21px)}
   #v0 .stepper{margin-block:clamp(0px,.6vh,6px)}
 }
+/* 홈: 화면 높이에 맞춰 카드가 늘어나고, 시작 버튼은 맨 아래 */
+@media (min-width:900px){
+  #v1 .wrap{min-height:100%;gap:clamp(10px,2vh,18px)}
+  #v1 .grid2{flex:1 1 auto;align-items:stretch;gap:clamp(12px,2vh,20px)}
+  #v1 .grid2>.panel:not([hidden]),#v1 .grid2>div:last-child>.panel:not([hidden]){display:flex;flex-direction:column;padding:clamp(16px,2.6vh,28px) clamp(18px,2.2vw,28px)}
+  #v1 .panel h2{font-size:clamp(20px,3vh,28px)}
+  #v1 .rank{flex:1 1 auto;display:flex;flex-direction:column;gap:clamp(5px,1vh,10px);margin-top:clamp(8px,1.6vh,16px)}
+  #v1 .rank .row{flex:1 1 0;max-height:clamp(44px,8.4vh,68px);display:flex;align-items:center;font-size:clamp(14px,2.1vh,18px);padding:0 14px;min-height:34px}
+  #v1 .steps{flex:1 1 auto;display:flex;flex-direction:column;gap:clamp(8px,1.4vh,14px)}
+  #v1 .steps li{flex:1 1 0;max-height:clamp(52px,9vh,76px);padding:0 14px;font-size:clamp(14px,2vh,17px)}
+  #v1 #goalPanel{justify-content:space-evenly}
+  #v1 #goalPanel .slot{width:clamp(40px,6vh,56px);height:clamp(40px,6vh,56px)}
+  #v1 #goalPanel .ring{width:clamp(72px,12vh,110px);height:clamp(72px,12vh,110px)}
+  #v1 .wrap>.btn,#v1 .wrap>.btn-row{margin-top:auto}
+  #v1 .wrap>.btn,#v1 .wrap .btn-row .btn{min-height:clamp(54px,8vh,72px);font-size:clamp(17px,2.4vh,21px)}
+}
 .cb{min-width:0}
 .cb b{white-space:nowrap}
 .btn.sm{padding-inline:14px;white-space:normal;line-height:1.25;text-wrap:balance}
