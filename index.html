@@ -699,6 +699,29 @@ body:not(.admin) #tomorrowBtn{display:none}
   #v3 .lvcard{padding:12px 16px;gap:6px}
   #v3 .cta3 .btn{min-height:52px;font-size:16px;min-width:180px}
 }
+/* ===== 태블릿 실기기 맞춤: 화면 높이를 채우고, 숫자·글자가 칸을 넘지 않게 ===== */
+@media (min-width:900px){
+  #v0 .wrap{min-height:100%;gap:clamp(10px,2vh,18px)}
+  #v0 .dgrid{flex:1 1 auto;align-items:stretch;gap:clamp(12px,2vh,20px)}
+  #v0 .dcol{gap:clamp(12px,2vh,20px)}
+  #v0 .dcol>.panel{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;padding:clamp(14px,2.6vh,26px) clamp(18px,2.2vw,28px)}
+  #v0 .dcol:first-child>.panel:first-child{flex:1.6 1 auto}
+  #v0 .panel h2{font-size:clamp(20px,3vh,28px)}
+  #v0 .panel .muted{font-size:clamp(13.5px,1.9vh,16px)!important}
+  #v0 .steps{gap:clamp(8px,1.4vh,14px)}
+  #v0 .steps li{padding:clamp(10px,1.8vh,18px) 14px;font-size:clamp(14px,2vh,17px)}
+  #v0 .choice,#v0 .adl .choice{min-height:clamp(46px,7vh,68px);font-size:clamp(15px,2.2vh,18px)}
+  #v0 .btn-row{margin-top:auto}
+  #v0 .btn{min-height:clamp(54px,8vh,72px);font-size:clamp(17px,2.4vh,21px)}
+  #v0 .stepper{margin-block:clamp(0px,.6vh,6px)}
+}
+.cb{min-width:0}
+.cb b{white-space:nowrap}
+.btn.sm{padding-inline:14px;white-space:normal;line-height:1.25;text-wrap:balance}
+.kdcard .combos,#kdBody{grid-template-columns:repeat(auto-fit,minmax(118px,1fr))!important}
+.kdcard .cb b,#kdBody .cb b{font-size:clamp(18px,2.7vw,26px)}
+.kdcard .cb small,#kdBody .cb small{font-size:clamp(10.5px,1.5vw,12px);white-space:normal;line-height:1.25}
+@media (max-width:760px){.kdcard .cb b,#kdBody .cb b{font-size:19px}}
 @media (min-width:1101px){
   #dash .d-main{padding:10px 20px 22px 16px}
   #dash .d-head{margin-bottom:10px}#dash .d-head h1{font-size:26px}
@@ -1557,7 +1580,7 @@ var P2=[
 ['분 넘게 훈련했어요. 손을 가볍게 털고, 피곤하면 쉬어 가요','You\'ve trained for over this many minutes. Shake your hand out, and rest if tired'],
 ['좋아요! 그대로 잡고 계세요!','Good! Keep holding!'],['좋아요! 흙의 감촉을 잘 느꼈어요','Good! You felt the clay well'],['미션 완성! 정말 잘하셨어요!','Mission complete! Great job!'],
 ['손가락을 바깥으로 조금 더 벌려 보세요!','Spread your fingers outward a little more!'],['손가락을 안쪽으로 조금 더 오므려 보세요!','Close your fingers inward a little more!'],
-['컨디션 맞춤 · 목표를 가볍게','Adjusted for today · lighter targets'],['플레이 화면에서 미션이 시작돼요','The mission starts on the play screen'],['진단 · 점토 반죽하기','Assessment · Kneading clay'],
+['목표 모양','Target shape'],['컨디션 맞춤 · 목표를 가볍게','Adjusted for today · lighter targets'],['플레이 화면에서 미션이 시작돼요','The mission starts on the play screen'],['진단 · 점토 반죽하기','Assessment · Kneading clay'],
 ['설정 완료','Done'],
 ['훈련 방식','Training setup'],['손가락 수','Number of fingers'],['엄지 · 검지 · 중지','Thumb · Index · Middle'],['엄지 · 검지','Thumb · Index'],
 ['움직임 범위','Movement range'],['좁게','Narrow'],['조금만 움직여도 반영','Counts small movements'],['기본','Default'],['넓게','Wide'],['크게 움직여야 반영','Needs bigger movements'],
